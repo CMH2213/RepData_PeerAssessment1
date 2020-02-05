@@ -116,7 +116,7 @@ head(steps_day[,c(1,4)])
 A histogram represents the frequency distribution of *continuous* variables. Conversely, a bar graph is a comparison of *discrete* variables. Histogram presents *numerical* data whereas bar graph shows *categorical* data. The histogram is drawn in such a way that there is no gap between the bars.
 
 **BasePlot**
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r Histogram_of_Daily_Steps, echo=TRUE, message=FALSE, warning=FALSE}
 hist(steps_day$dayTotal,breaks=20,main="Histogram of Daily Steps",xlab="Daily Steps")
 ```
 
@@ -137,12 +137,12 @@ head(stepsPerint)
 ```
 
 **BasePlot**
-```{r base_avg_int_per_day, echo=TRUE, message=FALSE, warning=FALSE}
+```{r Times_Series_Avg_Daily_Steps_base, echo=TRUE, message=FALSE, warning=FALSE}
 plot(stepsPerint,type="l")
 points(stepsPerint$interval[which.max(stepsPerint$steps)],stepsPerint$steps[which.max(stepsPerint$steps)],col="red",pch = 19)
 ```
 **ggplot2**
-```{r ggplot2_avg_int_per_day, echo=TRUE, message=FALSE, warning=FALSE}
+```{r Times_Series_Avg_Daily_Steps_base_ggplot, echo=TRUE, message=FALSE, warning=FALSE}
 pointx<-stepsPerint$interval[which.max(stepsPerint$steps)]
 pointy<-stepsPerint$steps[which.max(stepsPerint$steps)]
 ggplot(stepsPerint, aes(interval, steps)) +
@@ -199,12 +199,12 @@ newSteps_day <- newSteps_day %>% group_by(date) %>%
 ```
 
 **Base Plot**
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r Histogram_Avg_Daily_Steps_after_Imputing_base, echo=TRUE, message=FALSE, warning=FALSE}
 hist(newSteps_day$dayTotal,breaks=20,main="Histogram of Daily Steps",xlab="Daily Steps")
 ```
 
 **ggplot2**
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r Histogram_Avg_Daily_Steps_after_Imputing_ggplot, echo=TRUE, message=FALSE, warning=FALSE}
 qplot(newSteps_day$dayTotal, geom="histogram",binwidth=1000,main="Histogram of Daily Steps",xlab="Daily Steps")
 ```
 
@@ -272,7 +272,7 @@ summary(cbind(subset(stepsPerint,week=="weekday",3:4),
               subset(stepsPerint,week=="weekend",3:4)))
 ```
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r Panel_plot, echo=TRUE, message=FALSE, warning=FALSE}
 ggplot(stepsPerint, aes(interval, avg_steps)) +
   geom_line() +
   facet_grid(week~.) +
